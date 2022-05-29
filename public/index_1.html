@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Face Recognition</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #5F9EA0;
+    }
+
+    canvas {
+      position: absolute;
+    }
+
+    ul {
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    li {
+      list-style: none;
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+
+    @-moz-keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @-webkit-keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @-o-keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    .round {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      height: 50%;
+      padding-top: 30px;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+      letter-spacing: -0.065em;
+      font-family: "Hammersmith One", sans-serif;
+      -webkit-transition: all 0.25s ease-in-out;
+      -o-transition: all 0.25s ease-in-out;
+      -moz-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out;
+      box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+      border-radius: 300px;
+      z-index: 1;
+      border-width: 4px;
+      border-style: solid;
+    }
+
+    .round:hover {
+      width: 80%;
+      height: 80%;
+      left: -15%;
+      top: -15%;
+      font-size: 23px;
+      padding-top: 38px;
+      -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      -o-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+      border-size: 10px;
+      -webkit-transform: rotate(-360deg);
+      -moz-transform: rotate(-360deg);
+      -o-transform: rotate(-360deg);
+      transform: rotate(-360deg);
+    }
+
+    a.red {
+      background-color: rgba(239, 57, 50, 1);
+      color: rgba(133, 32, 28, 1);
+      border-color: rgba(133, 32, 28, 0.2);
+    }
+
+    a.red:hover {
+      color: rgba(239, 57, 50, 1);
+    }
+
+    a.green {
+      background-color: #90E2D2;
+      color: rgba(0, 63, 71, 1);
+      border-color: rgba(0, 63, 71, 0.2);
+    }
+
+    a.green:hover {
+      color: rgba(1, 151, 171, 1);
+    }
+
+    a.yellow {
+      background-color: rgba(252, 227, 1, 1);
+      color: rgba(153, 38, 0, 1);
+      border-color: rgba(153, 38, 0, 0.2);
+    }
+
+    a.yellow:hover {
+      color: rgba(252, 227, 1, 1);
+    }
+
+    .round span.round {
+      display: block;
+      opacity: 0;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      font-size: 1px;
+      border: none;
+      padding: 40% 20% 0 20%;
+      color: #fff;
+    }
+
+    .round span:hover {
+      opacity: 0.85;
+      font-size: 16px;
+      -webkit-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      -moz-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      -o-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    .green span {
+      background: rgba(0, 63, 71, 0.7);
+    }
+  </style>
+</head>
+
+<body onload="call('videocall')" style="overflow-x: hidden;">
+  <br>
+  <br>
+  <a href="\index.html" style="color:#000; font-weight: bold; text-decoration: none; font-size: larger;">
+    <---Back to Home</a> <!-- navbar -->
+      <br>
+      <br>
+      <main class="admin">
+        <div class="admin__upload-file">
+          <form action="#" enctype="multipart/form-data" method="post">
+            <input type="file" class="admin__input" id="myFile" name="myFile" />
+            <input class="admin__submit" type="submit" />
+          </form>
+        </div>
+      </main>
+      <br>
+      <br>
+      <br>
+
+      <video id="videoInput" width="720" height="550" muted controls></video>
+      <br />
+      <br />
+      <div class="container">
+        <div class="w-100">
+          <div class="col">
+            <ul>
+              <li>
+                <a class="round green" onclick="playVid()" style="color: #000;">Play
+                  <span class="round">That is, if you want to play the video</span></a>
+              </li>
+              <li>
+                <a class="round green" onclick="pauseVid()" style="color: #000;">Pause
+                  <span class="round">That is, if you want to pause the video</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <script src="./js/face-api.min.js"></script>
+      <script src="./js/script.js"></script>
+</body>
+
+</html>
