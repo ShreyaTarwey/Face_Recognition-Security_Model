@@ -12,6 +12,8 @@ a match.
 2. <a href="https://expressjs.com/" target="_blank">ExpressJS</a>
 3. <a href="https://javascript.info/" target="_blank">JavaScript</a>
 
+![Work Flow] (Face_Recognition-Security_Model\public\images\color.jpg) 
+
 Steps to run the project in local environment:
 
 <b>Step 1:</b>
