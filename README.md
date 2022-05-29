@@ -13,8 +13,6 @@ a match.
 3. <a href="https://javascript.info/" target="_blank">JavaScript</a>
 4. <a href="face-api.js" target="_blank"> APIs </a>
 
-![Work Flow] (Face_Recognition-Security_Model\public\images\color.jpg) 
-
 Steps to run the project in local environment:
 
 <b>Step 1:</b>
