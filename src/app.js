@@ -5,13 +5,13 @@ const bodyParser = require("body-parser");
 const app = express()
 const port = process.env.PORT || 8080
 
-const basePath = path.join(__dirname, '../public')
+// const basePath = path.join(__dirname, '../public')
 
-app.use(express.static(basePath))
+app.use(express.static("public"))
 
 app.use(
     bodyParser.urlencoded({
-      extended: true,
+      extended: false,
     })
   );
 
@@ -21,13 +21,13 @@ app.listen(port, () => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(basePath, 'index_1.html'))
+    res.sendFile( 'index_1.html')
 })
 
 app.get('/index_1', (req, res) => {
-    res.sendFile(path.join(basePath, 'index.html'))
+    res.sendFile( 'index.html')
 })
 
 app.get('/index_1', (req, res) => {
-    res.sendFile(path.join(basePath, 'index_2.html'))
+    res.sendFile( 'index_2.html')
 })
